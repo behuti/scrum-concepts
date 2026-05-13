@@ -456,12 +456,12 @@ header h1 {
   color: hsl(var(--badge-h), var(--badge-s), var(--badge-l));
 }
 
-.category-badge.evento { --badge-h: 142; --badge-s: 55%; }
-.category-badge.rol { --badge-h: 210; --badge-s: 70%; }
-.category-badge.artefacto { --badge-h: 30; --badge-s: 75%; }
-.category-badge.concepto { --badge-h: 280; --badge-s: 50%; }
-.category-badge.métrica { --badge-h: 350; --badge-s: 65%; }
-.category-badge.práctica { --badge-h: 185; --badge-s: 55%; }
+.category-badge.event { --badge-h: 142; --badge-s: 55%; }
+.category-badge.role { --badge-h: 210; --badge-s: 70%; }
+.category-badge.artifact { --badge-h: 30; --badge-s: 75%; }
+.category-badge.concept { --badge-h: 280; --badge-s: 50%; }
+.category-badge.metric { --badge-h: 350; --badge-s: 65%; }
+.category-badge.practice { --badge-h: 185; --badge-s: 55%; }
 .category-badge.framework { --badge-h: 230; --badge-s: 45%; }
 
 .topic-card .summary {

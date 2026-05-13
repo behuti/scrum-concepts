@@ -36,7 +36,7 @@ async function fetchTopics() {
     container.innerHTML = `
       <div class="loading">
         <div class="spinner"></div>
-        <p>Cargando tópicos...</p>
+        <p>Loading topics...</p>
       </div>`;
 
     const res = await fetch(API_URL);
@@ -49,7 +49,7 @@ async function fetchTopics() {
     container.innerHTML = `
       <div class="error-state">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-        <p>Error al cargar los datos: ${err.message}</p>
+        <p>Error loading data: ${err.message}</p>
       </div>`;
   }
 }
@@ -58,8 +58,8 @@ async function fetchTopics() {
 function renderFilters() {
   const categories = [...new Set(allTopics.map((t) => t.category))];
   const labels = {
-    evento: 'Eventos', rol: 'Roles', artefacto: 'Artefactos',
-    concepto: 'Conceptos', métrica: 'Métricas', práctica: 'Prácticas',
+    event: 'Events', role: 'Roles', artifact: 'Artifacts',
+    concept: 'Concepts', metric: 'Metrics', practice: 'Practices',
     framework: 'Framework'
   };
 
@@ -102,13 +102,13 @@ function renderTopics() {
     container.innerHTML = `
       <div class="no-results">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <p>No se encontraron tópicos con esos criterios.</p>
+        <p>No topics found matching your criteria.</p>
       </div>`;
-    resultsInfo.textContent = '0 resultados';
+    resultsInfo.textContent = '0 results';
     return;
   }
 
-  resultsInfo.textContent = `${filtered.length} resultado${filtered.length !== 1 ? 's' : ''}`;
+  resultsInfo.textContent = `${filtered.length} result${filtered.length !== 1 ? 's' : ''}`;
 
   container.innerHTML = filtered
     .map(
@@ -141,7 +141,7 @@ function openModal(topic) {
   modalBody.innerHTML = `
     <span class="category-badge ${topic.category}">${topic.category}</span>
     <p class="description">${esc(topic.description)}</p>
-    <div class="meta-label">Palabras clave</div>
+    <div class="meta-label">Keywords</div>
     <div class="keywords-row">
       ${topic.keywords.map((k) => `<span class="keyword-tag">${esc(k)}</span>`).join('')}
     </div>`;

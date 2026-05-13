@@ -1,102 +1,102 @@
 # Scrum Agile Guide
 
-API RESTful + SPA para consultar tópicos de la metodología **Scrum Agile**. Construida con Node.js + Express y vanilla HTML/CSS/JS con sistema de tema dark/light.
+RESTful API + SPA for browsing **Scrum Agile** methodology topics. Built with Node.js + Express and vanilla HTML/CSS/JS with a dark/light theme system.
 
 ## Stack
 
-| Capa | Tecnología |
+| Layer | Technology |
 |---|---|
 | Backend | Node.js, Express 4, CORS |
 | Frontend | HTML5, CSS3 (vanilla), JavaScript (ES6+) |
-| Tipografía | Fraunces (headings) + Sora (body) — Google Fonts |
-| Datos | 20 tópicos de Scrum en memoria (JSON) |
+| Typography | Fraunces (headings) + Sora (body) — Google Fonts |
+| Data | 20 Scrum topics in memory (JSON) |
 
-## Arquitectura
+## Architecture
 
 ```
 scrum-agile-api/
-├── server.js              # Entry point — Express server + rutas API
+├── server.js              # Entry point — Express server + API routes
 ├── data/
-│   └── topics.js          # Datos estáticos: 20 tópicos con id, título, descripción, keywords
+│   └── topics.js          # Static data: 20 topics with id, title, description, keywords
 ├── public/
-│   ├── index.html         # SPA con header, buscador, filtros, modal
-│   ├── styles.css         # Sistema de diseño: dark/light theme, animaciones, responsive
-│   └── app.js             # Lógica del cliente: fetch, filtros, theme toggle, modal
+│   ├── index.html         # SPA with header, search, filters, modal
+│   ├── styles.css         # Design system: dark/light theme, animations, responsive
+│   └── app.js             # Client logic: fetch, filters, theme toggle, modal
 ├── package.json
 └── .gitignore
 ```
 
 ### Frontend (skill: frontend-design)
 
-El frontend sigue los lineamientos de la skill `frontend-design`:
+The frontend follows the `frontend-design` skill guidelines:
 
-- **Dark mode por defecto** con toggle a light mode persistido en localStorage
-- **Tipografía expresiva**: Fraunces (variable font con ejes SOFT/WONK) para títulos, Sora para cuerpo
-- **Paleta audaz**: fondos oscuros profundos (#0b0d14), acentos en ámbar (#f59e0b) y violeta (#8b5cf6)
-- **Animaciones**: entrada escalonada de tarjetas con `animation-delay`, micro-interacciones en hover, modal con backdrop blur
-- **Textura**: noise overlay vía SVG filter (opacidad 2.5%, mezcla fija)
-- **Sin frameworks CSS**: todo el diseño es vanilla, sin dependencias frontend
+- **Dark mode by default** with light mode toggle persisted in localStorage
+- **Expressive typography**: Fraunces (variable font with SOFT/WONK axes) for titles, Sora for body
+- **Bold palette**: deep dark backgrounds (#0b0d14), amber (#f59e0b) and violet (#8b5cf6) accents
+- **Animations**: staggered card entrance with `animation-delay`, hover micro-interactions, modal with backdrop blur
+- **Texture**: noise overlay via SVG filter (2.5% opacity, overlay blend)
+- **No CSS frameworks**: all vanilla, zero frontend dependencies
 
 ## API Endpoints
 
 ### `GET /api/topics`
-Lista todos los tópicos. Soporta filtros vía query string.
+Lists all topics. Supports filtering via query string.
 
-**Parámetros:**
-| Query | Tipo | Ejemplo | Descripción |
+**Parameters:**
+| Query | Type | Example | Description |
 |---|---|---|---|
-| `category` | string | `?category=evento` | Filtra por categoría (normaliza acentos) |
-| `search` | string | `?search=sprint` | Busca en título, descripción y keywords |
+| `category` | string | `?category=event` | Filter by category (normalizes accents) |
+| `search` | string | `?search=sprint` | Search in title, description and keywords |
 
-**Respuesta:** `200 OK` — Array de tópicos.
+**Response:** `200 OK` — Array of topics.
 
 ### `GET /api/topics/:id`
-Obtiene un tópico por su ID.
+Gets a topic by ID.
 
-**Respuesta:** `200 OK` — Objeto del tópico. `404` si no existe.
+**Response:** `200 OK` — Topic object. `404` if not found.
 
 ### `GET /api/categories`
-Lista las categorías disponibles con sus etiquetas.
+Lists available categories with their labels.
 
-**Respuesta:** `200 OK` — `[{ id: "evento", label: "Evento" }, ...]`
+**Response:** `200 OK` — `[{ id: "event", label: "Event" }, ...]`
 
 ### `GET /api/stats`
-Estadísticas del contenido.
+Content statistics.
 
-**Respuesta:** `200 OK`
+**Response:** `200 OK`
 ```json
 {
   "total": 20,
   "categories": 7,
   "byCategory": [
-    { "category": "evento", "count": 5, "label": "Evento" }
+    { "category": "event", "count": 5, "label": "Event" }
   ]
 }
 ```
 
-## Categorías
+## Categories
 
-| Categoría | Cantidad |
+| Category | Count |
 |---|---|
 | Framework | 1 |
-| Evento | 5 |
-| Artefacto | 4 |
-| Rol | 3 |
-| Concepto | 3 |
-| Práctica | 2 |
-| Métrica | 2 |
+| Event | 5 |
+| Artifact | 4 |
+| Role | 3 |
+| Concept | 3 |
+| Practice | 2 |
+| Metric | 2 |
 
-## Cómo ejecutar
+## How to run
 
 ```bash
 npm install
 npm start
-# Servidor en http://localhost:3000
+# Server at http://localhost:3000
 ```
 
-## Autoría
+## Authorship
 
-Proyecto desarrollado por **Behuti** con asistencia de **opencode** (big-pickle).  
-Diseño frontend basado en la skill `frontend-design`.
+Project developed by **Behuti** with assistance from **opencode** (big-pickle).  
+Frontend design based on the `frontend-design` skill.
 
-Datos basados en la [Guía Scrum](https://scrumguides.org).
+Data based on the [Scrum Guide](https://scrumguides.org).

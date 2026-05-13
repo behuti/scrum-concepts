@@ -12,12 +12,12 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const CATEGORY_LABELS = {
-  evento: 'Evento',
-  rol: 'Rol',
-  artefacto: 'Artefacto',
-  concepto: 'Concepto',
-  métrica: 'Métrica',
-  práctica: 'Práctica',
+  event: 'Event',
+  role: 'Role',
+  artifact: 'Artifact',
+  concept: 'Concept',
+  metric: 'Metric',
+  practice: 'Practice',
   framework: 'Framework'
 };
 
@@ -52,7 +52,7 @@ app.get('/api/topics/:id', (req, res) => {
   const topic = topics.find((t) => t.id === id);
 
   if (!topic) {
-    return res.status(404).json({ error: 'Tópico no encontrado' });
+    return res.status(404).json({ error: 'Topic not found' });
   }
 
   res.json(topic);
@@ -82,9 +82,9 @@ app.get('*', (_req, res) => {
 
 app.use((err, _req, res, _next) => {
   console.error('Error:', err.message);
-  res.status(500).json({ error: 'Error interno del servidor' });
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 app.listen(PORT, () => {
-  console.log(`Scrum Agile API corriendo en http://localhost:${PORT}`);
+  console.log(`Scrum Agile API running at http://localhost:${PORT}`);
 });

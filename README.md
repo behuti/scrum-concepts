@@ -96,7 +96,7 @@ npm start
 
 ## Autoría
 
-Proyecto desarrollado por **Zaga Labs** con asistencia de **opencode** (big-pickle).  
+Proyecto desarrollado por **Behuti** con asistencia de **opencode** (big-pickle).  
 Diseño frontend basado en la skill `frontend-design`.
 
 Datos basados en la [Guía Scrum](https://scrumguides.org).

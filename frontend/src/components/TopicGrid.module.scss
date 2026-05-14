@@ -1,0 +1,111 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.skeleton {
+  pointer-events: none;
+  border-color: transparent;
+}
+
+.skeletonLine {
+  background: var(--surface-alt);
+  border-radius: var(--radius-sm);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.skeletonTitle {
+  height: 1.3rem;
+  width: 55%;
+}
+
+.skeletonBadge {
+  height: 1rem;
+  width: 4.5rem;
+}
+
+.skeletonSummary {
+  height: 0.85rem;
+  width: 100%;
+  margin-bottom: 0.45rem;
+}
+
+.skeletonSummaryShort {
+  width: 70%;
+}
+
+.skeletonTag {
+  height: 1.2rem;
+  width: 3.2rem;
+  background: var(--surface-alt);
+  border-radius: 4px;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.2; }
+}
+
+.spinner {
+  text-align: center;
+  padding: 5rem 2rem;
+  color: var(--text-muted);
+  grid-column: 1 / -1;
+
+  .spinnerInner {
+    width: 32px;
+    height: 32px;
+    border: 2.5px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 0 auto 1rem;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error {
+  text-align: center;
+  padding: 5rem 2rem;
+  color: var(--danger);
+  grid-column: 1 / -1;
+
+  svg {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+.noResults {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-muted);
+  grid-column: 1 / -1;
+
+  svg {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 0.75rem;
+    opacity: 0.3;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

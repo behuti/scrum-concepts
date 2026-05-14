@@ -1,0 +1,33 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  flex: 1;
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.resultsInfo {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  transition: color var(--theme-transition);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 1.2rem;
+  }
+  .controls {
+    flex-direction: column;
+  }
+}

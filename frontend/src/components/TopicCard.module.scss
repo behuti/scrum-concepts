@@ -1,0 +1,163 @@
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.4rem;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  animation: cardIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  transition:
+    background var(--theme-transition),
+    border-color var(--theme-transition),
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+
+  &:focus-visible {
+    border-color: var(--accent);
+    box-shadow:
+      0 0 0 3px var(--accent-subtle),
+      0 0 20px var(--accent-glow);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--accent-subtle), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-3px) scale(1.01);
+    border-color: var(--accent);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.2),
+      0 0 0 1px var(--accent-subtle);
+
+    &::before {
+      opacity: 1;
+    }
+
+    &::after {
+      opacity: 0.5;
+    }
+  }
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.card h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  transition: color var(--theme-transition);
+}
+
+.card:hover h3 {
+  color: var(--accent);
+}
+
+.badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  transition: background var(--theme-transition), color var(--theme-transition);
+  --badge-h: 0;
+  --badge-s: 0%;
+  background: hsla(var(--badge-h), var(--badge-s), var(--badge-l), 0.15);
+  color: hsl(var(--badge-h), var(--badge-s), var(--badge-l));
+}
+
+.badge[data-category='event'] { --badge-h: 142; --badge-s: 55%; }
+.badge[data-category='role'] { --badge-h: 210; --badge-s: 70%; }
+.badge[data-category='artifact'] { --badge-h: 30; --badge-s: 75%; }
+.badge[data-category='concept'] { --badge-h: 280; --badge-s: 50%; }
+.badge[data-category='metric'] { --badge-h: 350; --badge-s: 65%; }
+.badge[data-category='practice'] { --badge-h: 185; --badge-s: 55%; }
+.badge[data-category='framework'] { --badge-h: 230; --badge-s: 45%; }
+
+.summary {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  transition: color var(--theme-transition);
+}
+
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.65rem;
+  position: relative;
+  z-index: 1;
+}
+
+.keyword {
+  font-size: 0.68rem;
+  padding: 0.15rem 0.45rem;
+  background: var(--bg);
+  border-radius: 4px;
+  color: var(--text-muted);
+  transition: background var(--theme-transition), color var(--theme-transition);
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1rem 1.1rem;
+  }
+  .card h3 {
+    font-size: 0.95rem;
+  }
+}

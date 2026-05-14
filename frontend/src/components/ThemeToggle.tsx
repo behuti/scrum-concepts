@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import styles from './ThemeToggle.module.scss';
 
 const STORAGE_KEY = 'scrum-theme';
 
@@ -21,14 +22,14 @@ export default function ThemeToggle() {
 
   return (
     <button
-      className="theme-toggle"
+      className={styles.toggle}
       onClick={toggle}
       aria-label="Toggle theme"
     >
       {mounted ? (
         <>
           <svg
-            className="sun-icon"
+            className={styles.sunIcon}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -48,7 +49,7 @@ export default function ThemeToggle() {
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
           </svg>
           <svg
-            className="moon-icon"
+            className={styles.moonIcon}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

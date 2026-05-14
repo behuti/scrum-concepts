@@ -1,6 +1,7 @@
 'use client';
 
 import { Topic } from '@/lib/types';
+import styles from './TopicCard.module.scss';
 
 interface TopicCardProps {
   topic: Topic;
@@ -10,7 +11,7 @@ interface TopicCardProps {
 export default function TopicCard({ topic, onClick }: TopicCardProps) {
   return (
     <div
-      className="topic-card"
+      className={styles.card}
       tabIndex={0}
       role="button"
       onClick={() => onClick(topic)}
@@ -21,16 +22,16 @@ export default function TopicCard({ topic, onClick }: TopicCardProps) {
         }
       }}
     >
-      <div className="topic-card-header">
+      <div className={styles.header}>
         <h3>{topic.title}</h3>
-        <span className={`category-badge ${topic.category}`}>
+        <span className={styles.badge} data-category={topic.category}>
           {topic.category}
         </span>
       </div>
-      <p className="summary">{topic.summary}</p>
-      <div className="keywords-row">
+      <p className={styles.summary}>{topic.summary}</p>
+      <div className={styles.keywords}>
         {topic.keywords.map((k) => (
-          <span key={k} className="keyword-tag">{k}</span>
+          <span key={k} className={styles.keyword}>{k}</span>
         ))}
       </div>
     </div>

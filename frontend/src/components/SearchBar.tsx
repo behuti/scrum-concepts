@@ -1,5 +1,7 @@
 'use client';
 
+import styles from './SearchBar.module.scss';
+
 interface SearchBarProps {
   value: string;
   onChange: (value: string) => void;
@@ -7,7 +9,7 @@ interface SearchBarProps {
 
 export default function SearchBar({ value, onChange }: SearchBarProps) {
   return (
-    <div className="search-wrapper">
+    <div className={styles.wrapper}>
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -23,6 +25,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
       <label htmlFor="searchInput" className="sr-only">Search topics</label>
       <input
         id="searchInput"
+        className={styles.input}
         type="text"
         placeholder="Search topics..."
         value={value}

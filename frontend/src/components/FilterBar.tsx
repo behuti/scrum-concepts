@@ -1,5 +1,7 @@
 'use client';
 
+import styles from './FilterBar.module.scss';
+
 interface FilterBarProps {
   categories: string[];
   activeFilter: string;
@@ -22,9 +24,9 @@ export default function FilterBar({
   onFilterChange,
 }: FilterBarProps) {
   return (
-    <div className="filter-group">
+    <div className={styles.group}>
       <button
-        className={`filter-btn${activeFilter === 'all' ? ' active' : ''}`}
+        className={`${styles.btn}${activeFilter === 'all' ? ` ${styles.active}` : ''}`}
         onClick={() => onFilterChange('all')}
       >
         All
@@ -32,7 +34,7 @@ export default function FilterBar({
       {categories.map((cat) => (
         <button
           key={cat}
-          className={`filter-btn${activeFilter === cat ? ' active' : ''}`}
+          className={`${styles.btn}${activeFilter === cat ? ` ${styles.active}` : ''}`}
           onClick={() => onFilterChange(cat)}
         >
           {LABELS[cat] || cat}

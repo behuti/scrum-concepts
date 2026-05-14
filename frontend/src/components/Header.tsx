@@ -1,12 +1,13 @@
 import ThemeToggle from './ThemeToggle';
+import styles from './Header.module.scss';
 
 export default function Header() {
   return (
-    <header>
-      <div className="header-inner">
-        <div className="header-brand">
-          <h1>Scrum<span className="accent-dot">.</span></h1>
-          <span className="header-sub">Reference Guide</span>
+    <header className={styles.header}>
+      <div className={styles.inner}>
+        <div className={styles.brand}>
+          <h1 className={styles.title}>Scrum<span className={styles.accentDot}>.</span></h1>
+          <span className={styles.sub}>Reference Guide</span>
         </div>
         <ThemeToggle />
       </div>

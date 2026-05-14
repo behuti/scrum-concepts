@@ -8,6 +8,7 @@ import SearchBar from '@/components/SearchBar';
 import FilterBar from '@/components/FilterBar';
 import TopicGrid from '@/components/TopicGrid';
 import TopicModal from '@/components/TopicModal';
+import styles from './page.module.scss';
 
 export default function Home() {
   const [topics, setTopics] = useState<Topic[]>([]);
@@ -43,8 +44,8 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="container">
-        <section className="controls">
+      <main className={styles.container}>
+        <section className={styles.controls}>
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
           <FilterBar
             categories={categories}
@@ -52,7 +53,7 @@ export default function Home() {
             onFilterChange={setActiveFilter}
           />
         </section>
-        <p className="results-info">
+        <p className={styles.resultsInfo}>
           {loading || error
             ? ''
             : `${filtered.length} result${filtered.length !== 1 ? 's' : ''}`}

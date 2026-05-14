@@ -2,6 +2,8 @@
 
 import { Topic } from '@/lib/types';
 import TopicCard from './TopicCard';
+import styles from './TopicGrid.module.scss';
+import cardStyles from './TopicCard.module.scss';
 
 interface TopicGridProps {
   topics: Topic[];
@@ -12,17 +14,17 @@ interface TopicGridProps {
 
 function SkeletonCard() {
   return (
-    <div className="topic-card skeleton" aria-hidden="true">
-      <div className="topic-card-header">
-        <div className="skeleton-line skeleton-title" />
-        <div className="skeleton-line skeleton-badge" />
+    <div className={`${cardStyles.card} ${styles.skeleton}`} aria-hidden="true">
+      <div className={cardStyles.header}>
+        <div className={`${styles.skeletonLine} ${styles.skeletonTitle}`} />
+        <div className={`${styles.skeletonLine} ${styles.skeletonBadge}`} />
       </div>
-      <div className="skeleton-line skeleton-summary" />
-      <div className="skeleton-line skeleton-summary skeleton-summary-short" />
-      <div className="keywords-row">
-        <div className="skeleton-tag" />
-        <div className="skeleton-tag" />
-        <div className="skeleton-tag" />
+      <div className={`${styles.skeletonLine} ${styles.skeletonSummary}`} />
+      <div className={`${styles.skeletonLine} ${styles.skeletonSummary} ${styles.skeletonSummaryShort}`} />
+      <div className={cardStyles.keywords}>
+        <div className={styles.skeletonTag} />
+        <div className={styles.skeletonTag} />
+        <div className={styles.skeletonTag} />
       </div>
     </div>
   );
@@ -36,7 +38,7 @@ export default function TopicGrid({
 }: TopicGridProps) {
   if (loading) {
     return (
-      <div className="topics-grid" aria-busy="true">
+      <div className={styles.grid} aria-busy="true">
         {Array.from({ length: 6 }).map((_, i) => (
           <SkeletonCard key={i} />
         ))}
@@ -46,7 +48,7 @@ export default function TopicGrid({
 
   if (error) {
     return (
-      <div className="error-state">
+      <div className={styles.error}>
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -67,7 +69,7 @@ export default function TopicGrid({
 
   if (topics.length === 0) {
     return (
-      <div className="no-results">
+      <div className={styles.noResults}>
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -86,7 +88,7 @@ export default function TopicGrid({
   }
 
   return (
-    <div className="topics-grid">
+    <div className={styles.grid}>
       {topics.map((topic) => (
         <TopicCard key={topic.id} topic={topic} onClick={onTopicClick} />
       ))}

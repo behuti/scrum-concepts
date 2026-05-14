@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { Topic } from '@/lib/types';
+import styles from './TopicModal.module.scss';
 
 interface TopicModalProps {
   topic: Topic | null;
@@ -71,7 +72,7 @@ export default function TopicModal({ topic, onClose }: TopicModalProps) {
 
   return (
     <div
-      className="modal-overlay open"
+      className={`${styles.overlay} ${styles.open}`}
       ref={overlayRef}
       onClick={(e) => {
         if (e.target === overlayRef.current) onClose();
@@ -80,11 +81,11 @@ export default function TopicModal({ topic, onClose }: TopicModalProps) {
       aria-modal="true"
       aria-labelledby="modalTitle"
     >
-      <div className="modal">
-        <div className="modal-header">
+      <div className={styles.modal}>
+        <div className={styles.header}>
           <h2 id="modalTitle">{topic.title}</h2>
           <button
-            className="modal-close"
+            className={styles.close}
             onClick={onClose}
             aria-label="Close"
           >
@@ -102,17 +103,15 @@ export default function TopicModal({ topic, onClose }: TopicModalProps) {
             </svg>
           </button>
         </div>
-        <div className="modal-body">
-          <span className={`category-badge ${topic.category}`}>
+        <div className={styles.body}>
+          <span className={styles.badge} data-category={topic.category}>
             {topic.category}
           </span>
-          <p className="description">{topic.description}</p>
-          <div className="meta-label">Keywords</div>
-          <div className="keywords-row">
+          <p className={styles.description}>{topic.description}</p>
+          <div className={styles.metaLabel}>Keywords</div>
+          <div className={styles.keywords}>
             {topic.keywords.map((k) => (
-              <span key={k} className="keyword-tag">
-                {k}
-              </span>
+              <span key={k} className={styles.keyword}>{k}</span>
             ))}
           </div>
         </div>

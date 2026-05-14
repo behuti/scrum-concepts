@@ -4,6 +4,7 @@ const STORAGE_KEY = 'scrum-theme';
 let allTopics = [];
 let activeFilter = 'all';
 let searchQuery = '';
+let lastFocusedElement = null;
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
@@ -113,7 +114,7 @@ function renderTopics() {
   container.innerHTML = filtered
     .map(
       (t, i) => `
-    <div class="topic-card" data-id="${t.id}" style="animation-delay:${i * 0.04}s">
+    <div class="topic-card" data-id="${t.id}" tabindex="0" role="button" style="animation-delay:${i * 0.04}s">
       <div class="topic-card-header">
         <h3>${esc(t.title)}</h3>
         <span class="category-badge ${t.category}">${t.category}</span>
@@ -127,16 +128,49 @@ function renderTopics() {
     .join('');
 
   container.querySelectorAll('.topic-card').forEach((card) => {
-    card.addEventListener('click', () => {
+    const handler = () => {
       const id = parseInt(card.dataset.id);
       const topic = allTopics.find((t) => t.id === id);
       if (topic) openModal(topic);
+    };
+    card.addEventListener('click', handler);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handler();
+      }
     });
   });
 }
 
 /* Modal */
+function getFocusable(el) {
+  return [...el.querySelectorAll(
+    'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+  )];
+}
+
+function trapFocus(e) {
+  if (e.key !== 'Tab') return;
+  const focusable = getFocusable(modalOverlay);
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey) {
+    if (document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    }
+  } else {
+    if (document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+}
+
 function openModal(topic) {
+  lastFocusedElement = document.activeElement;
   modalTitle.textContent = topic.title;
   modalBody.innerHTML = `
     <span class="category-badge ${topic.category}">${topic.category}</span>
@@ -147,11 +181,16 @@ function openModal(topic) {
     </div>`;
   modalOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.addEventListener('keydown', trapFocus);
+  const first = getFocusable(modalOverlay)[0];
+  if (first) first.focus();
 }
 
 function closeModal() {
   modalOverlay.classList.remove('open');
   document.body.style.overflow = '';
+  document.removeEventListener('keydown', trapFocus);
+  if (lastFocusedElement) lastFocusedElement.focus();
 }
 
 function esc(str) {

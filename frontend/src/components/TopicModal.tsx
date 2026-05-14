@@ -66,7 +66,7 @@ export default function TopicModal({ topic, onClose }: TopicModalProps) {
         previousFocus.focus();
       }
     };
-  }, [!!topic, onClose]);
+  }, [topic, onClose]);
 
   if (!topic) return null;
 

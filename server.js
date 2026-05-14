@@ -2,14 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const path = require('path');
 const topics = require('./data/topics');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(helmet());
-app.use(cors({ origin: process.env.CORS_ORIGIN || 'http://localhost:3000' }));
+app.use(cors());
 app.use(express.json());
 
 const limiter = rateLimit({
@@ -19,8 +18,6 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 app.use('/api/', limiter);
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 const CATEGORY_LABELS = {
   event: 'Event',
@@ -85,10 +82,6 @@ app.get('/api/stats', (_req, res) => {
       }, {})
     ).map(([category, count]) => ({ category, count, label: CATEGORY_LABELS[category] || category }))
   });
-});
-
-app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.use((err, _req, res, _next) => {

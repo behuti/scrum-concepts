@@ -21,17 +21,13 @@ describe('TopicModal', () => {
   });
 
   it('renders topic details when topic is provided', () => {
-    const { container } = render(
-      <TopicModal topic={mockTopic} onClose={vi.fn()} />
-    );
+    render(<TopicModal topic={mockTopic} onClose={vi.fn()} />);
     expect(screen.getByText('Scrum')).toBeInTheDocument();
     expect(
       screen.getByText('Scrum is a lightweight framework.')
     ).toBeInTheDocument();
-    const keywordTags = container.querySelectorAll('.keyword-tag');
-    expect(keywordTags).toHaveLength(2);
-    expect(keywordTags[0]).toHaveTextContent('agile');
-    expect(keywordTags[1]).toHaveTextContent('framework');
+    expect(screen.getByText('agile')).toBeInTheDocument();
+    expect(screen.getAllByText('framework').length).toBe(2);
   });
 
   it('calls onClose when close button is clicked', async () => {

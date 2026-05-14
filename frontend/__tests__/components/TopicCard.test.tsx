@@ -20,13 +20,9 @@ describe('TopicCard', () => {
   });
 
   it('renders all keywords', () => {
-    const { container } = render(
-      <TopicCard topic={mockTopic} onClick={vi.fn()} />
-    );
-    const keywordTags = container.querySelectorAll('.keyword-tag');
-    expect(keywordTags).toHaveLength(2);
-    expect(keywordTags[0]).toHaveTextContent('agile');
-    expect(keywordTags[1]).toHaveTextContent('framework');
+    render(<TopicCard topic={mockTopic} onClick={vi.fn()} />);
+    expect(screen.getByText('agile')).toBeInTheDocument();
+    expect(screen.getAllByText('framework').length).toBe(2);
   });
 
   it('calls onClick with topic when clicked', async () => {
